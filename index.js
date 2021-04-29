@@ -7,6 +7,8 @@ const app = express()
 
 const Note = require('./models/Note')
 
+const usersRouter = require('./controllers/users')
+
 app.use(cors())
 app.use(express.json())
 
@@ -66,6 +68,8 @@ app.post('/api/notes', (request, response) => {
     response.status(201).json(note)
   })
 })
+
+app.use('/api/users', usersRouter)
 
 app.use((request, response, next) => {
   response.status(404).end()
