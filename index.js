@@ -53,7 +53,7 @@ app.post('/api/notes', (request, response) => {
   const note = request.body
 
   if (!note || !note.content) {
-    return response.status(404).json({ error: 'required "content" field is missing' })
+    return response.status(400).json({ error: 'required "content" field is missing' })
   }
 
   const newNote = new Note({
@@ -82,6 +82,8 @@ app.use((error, request, response, next) => {
 
 const PORT = process.env.PORT
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
+module.exports = { app, server }
